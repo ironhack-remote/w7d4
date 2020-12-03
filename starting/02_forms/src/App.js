@@ -1,25 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import React from "react";
+import questions from "./questions.json";
+import Question from "./components/Question";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+// goals for now: add a new question with the right data
+// filter in real time by either tag or content
+// select menu that is going to change things by topic
+
+class App extends React.Component {
+  render() {
+    return (
+      <div style={{ margin: "0 auto", maxWidth: "768px" }} className="App">
+        <h3 style={{ textAlign: "center" }}>Slack overflow</h3>
+
+        <div>Hello, these are the questions</div>
+        {questions.map((el) => (
+          <Question {...el} />
+        ))}
+      </div>
+    );
+  }
 }
 
 export default App;
