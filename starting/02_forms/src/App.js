@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import React from "react";
 import questions from "./questions.json";
 import Question from "./components/Question";
+import { addNewQuestion } from "./services/questions";
 
 // goals for now: add a new question with the right data
 // filter in real time by either tag or content
