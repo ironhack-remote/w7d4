@@ -1,6 +1,7 @@
 import React from "react";
 
 const Question = (props) => {
+  console.log("props:", props);
   return (
     <div
       style={{
@@ -16,7 +17,7 @@ const Question = (props) => {
         <div>{props.author}</div>
       </div>
 
-      {/* <button>Upvote</button> */}
+      <button onClick={() => props.deleteQuestion(props.id)}>Remove</button>
     </div>
   );
 };

@@ -5,7 +5,7 @@ import Question from "./components/Question";
 import { addNewQuestion, getAllQuestions } from "./services/questions";
 
 // goals for now: add a new question with the right data
-// filter in real time by either tag or content
+// filter in real time by either author or content
 // remove question from list
 
 class App extends React.Component {
@@ -31,9 +31,16 @@ class App extends React.Component {
     });
   };
 
+  deleteQuestion = (id) => {
+    const arrayWithoutId = this.state.questions.filter((el) => el.id !== id);
+
+    this.setState({
+      questions: arrayWithoutId,
+    });
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
     const question = {
       question: this.state.question,
       author: this.state.author,
@@ -41,7 +48,6 @@ class App extends React.Component {
       tags: this.state.tags,
     };
     addNewQuestion(question).then((res) => {
-      console.log("res:", res);
       this.setState({
         questions: [res, ...this.state.questions],
       });
@@ -97,13 +103,9 @@ class App extends React.Component {
             />
             <button type="submit">Submit this question</button>
           </form>
-          {/* <input
-            style={{ width: "100%" }}
-            onChange={(event) => this.handleChange(event)}
-          /> */}
         </div>
         {filteredQuestions.map((el) => (
-          <Question key={el.id} {...el} />
+          <Question deleteQuestion={this.deleteQuestion} key={el.id} {...el} />
         ))}
       </div>
     );
