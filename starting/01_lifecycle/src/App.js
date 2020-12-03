@@ -21,6 +21,10 @@ const paginatedRequest = (page = "1") =>
 // component just updated. Lets check if there is a componentDidUpdate
 // if there is, call it, componentDidUpdate()
 
+// if the componet is about to leave, check if there is componentWillUnmount
+// if so, call componentWllUnmount
+// remove compentn from DOM
+
 class App extends Component {
   state = { counter: 0, characters: [], page: 1 };
 
@@ -40,23 +44,23 @@ class App extends Component {
   };
 
   componentDidMount = () => {
-    console.log("THIS APP COMPONENT HAS BEEN ADDED TO THE DOM");
-    console.log("INITIAL STATE IN MOUNT", this.state);
+    // console.log("THIS APP COMPONENT HAS BEEN ADDED TO THE DOM");
+    // console.log("INITIAL STATE IN MOUNT", this.state);
     this.get20Characters();
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
-    console.log("THIS APP COMPONENT HAS BEEN UPDATED");
-    console.log("NEW SHINY STATE", this.state);
-    console.log("prevState:", prevState);
-    // if (this.state.page !== prevState.page) {
-    //   paginatedRequest(this.state.page).then((res) => {
-    //     this.setState({
-    //       characters: [...res.data.results, ...prevState.characters],
-    //     });
-    //   });
-    // }
-  };
+  // componentDidUpdate = (prevProps, prevState) => {
+  //   console.log("THIS APP COMPONENT HAS BEEN UPDATED");
+  //   console.log("NEW SHINY STATE", this.state);
+  //   console.log("prevState:", prevState);
+  //   // if (this.state.page !== prevState.page) {
+  //   //   paginatedRequest(this.state.page).then((res) => {
+  //   //     this.setState({
+  //   //       characters: [...res.data.results, ...prevState.characters],
+  //   //     });
+  //   //   });
+  //   // }
+  // };
 
   moreCharacters = () => {
     const page = this.state.page + 1;
@@ -89,16 +93,18 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hello</h1>
-        <button onClick={this.moreCharacters}>Get me more characters</button>
-        {this.state.characters.map((el) => (
-          <RickApiImg image={el.image} key={el.id} />
-        ))}
-        {/* <button onClick={this.increment}>PLUS</button>
+        <button onClick={this.get20Characters}>Display chaacters</button>
+
+        {/* <button onClick={this.moreCharacters}>Get me more characters</button> */}
+        <button onClick={this.increment}>PLUS</button>
         {this.state.counter < 5 ? (
           <Counter counter={this.state.counter} />
         ) : (
           <div />
-        )} */}
+        )}
+        {this.state.characters.map((el) => (
+          <RickApiImg image={el.image} key={el.id} />
+        ))}
         {/* <Counter counter={this.state.counter} /> */}
       </div>
     );
@@ -118,7 +124,7 @@ class Counter extends Component {
     console.log("COUNTER MOUTED");
   };
 
-  componentDidUpdate = () => {
+  componentDidUpdate = (prevProps, prevState) => {
     console.log("COUNTER UPDATING");
   };
 
