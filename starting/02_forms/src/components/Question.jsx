@@ -11,7 +11,7 @@ const Question = (props) => {
         padding: "1em",
       }}
     >
-      <div style={{}}>
+      <div>
         <h5 style={{ margin: "0" }}>{props.question}</h5>
         <div>{props.author}</div>
       </div>
